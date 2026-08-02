@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: silk --default, abyss --prefersdark;
+}
+
+@theme {
+  --font-header: 'Libertinus Math', system-ui;
+}
+
+@custom-variant dark (&:where([data-theme=abyss], [data-theme=abyss] *));
+
+@layer base {
+  * {
+    font-family: "Roboto", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-base-200);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    border-radius: 999px;
+    border: 2px solid var(--color-base-200);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary)
+  }
+}
+
+/* Animated gradient ring used by AnimatedBorderButton.
+   Scales with content width (unlike a fixed-viewBox SVG path),
+   so it works correctly at any button size or label length. */
+  @property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+  
+@keyframes border-rotate {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@layer components {
+  .animated-border-btn {
+    position: relative;
+    isolation: isolate;
+  }
+ 
+  .animated-border-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--border-angle),
+      transparent 0%,
+      var(--color-primary) 12%,
+      transparent 28%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+ 
+  .animated-border-btn:hover::before,
+  .animated-border-btn:focus-visible::before {
+    opacity: 1;
+    animation: border-rotate 2.2s linear infinite;
+  }
+ 
+  .animated-border-btn:hover,
+  .animated-border-btn:focus-visible {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+}
+
+/* Respect reduced-motion preference across every animation/transition */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
