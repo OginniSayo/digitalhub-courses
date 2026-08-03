@@ -84,4 +84,20 @@ export const courses: Course[] = [
     icon: assets.PackageSearch,
     price: 20
   },
+  {
+    id: 'degen-trading',
+    title: 'Degenerate Trading — Advanced Crypto Strategies',
+    description:
+      'A hands-on guide to high-risk, high-reward crypto trading — meme coins, new token launches, and momentum plays — with a focus on managing risk while chasing fast gains.',
+    icon: assets.RocketIcon,
+    price: 20,
+  },
+  {
+    id: 'web2-web3',
+    title: 'Web2/Web3',
+    description:
+      'Understand how traditional web development connects to Web3 — wallets, smart contracts, and decentralized apps — so you can bridge your existing skills into the blockchain space.',
+    icon: assets.Link2,
+    price: 20,
+  },
 ];

@@ -17,7 +17,9 @@ import {
   CreditCard,
   Coins,
   CopyIcon,
-  CheckIcon
+  CheckIcon,
+  RocketIcon,
+  Link2
 } from 'lucide-react'
 
 import mastercardLogo from './mastercard-logo.svg'
@@ -45,6 +47,8 @@ export const assets = {
   ShieldCheck, 
   CopyIcon,
   CheckIcon,
+  RocketIcon,
+  Link2,
 
   CreditCard, 
   Coins,
